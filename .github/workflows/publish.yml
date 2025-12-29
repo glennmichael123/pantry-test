@@ -49,9 +49,6 @@ jobs:
           zig build
           echo "$PWD/zig-out/bin" >> $GITHUB_PATH
 
-      - name: Verify pantry
-        run: pantry --version
-
       - name: Publish (Dry Run)
         if: ${{ inputs.dry_run == true }}
         run: pantry publish --dry-run --access public
