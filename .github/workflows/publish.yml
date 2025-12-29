@@ -27,9 +27,14 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Setup Zig
-        uses: goto-bus-stop/setup-zig@v2
-        with:
-          version: master
+        run: |
+          curl -L https://ziglang.org/builds/zig-linux-x86_64-0.16.0-dev.1859+212968c57.tar.xz -o zig.tar.xz
+          tar -xf zig.tar.xz
+          echo "$PWD/zig-linux-x86_64-0.16.0-dev.1859+212968c57" >> $GITHUB_PATH
+          zig version
+
+      - name: Verify Zig
+        run: zig version
 
       - name: Setup pantry
         uses: home-lang/pantry/packages/action@main
