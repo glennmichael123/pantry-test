@@ -28,10 +28,10 @@ jobs:
 
       - name: Setup Zig
         run: |
-          curl -L https://ziglang.org/builds/zig-linux-x86_64-0.16.0-dev.1859+212968c57.tar.xz -o zig.tar.xz
+          curl -L https://ziglang.org/builds/zig-x86_64-linux-0.16.0-dev.1859+212968c57.tar.xz -o zig.tar.xz
           tar -xf zig.tar.xz
-          echo "$PWD/zig-linux-x86_64-0.16.0-dev.1859+212968c57" >> $GITHUB_PATH
-          zig version
+          mv zig-x86_64-linux-0.16.0-dev.1859+212968c57 zig
+          echo "$PWD/zig" >> $GITHUB_PATH
 
       - name: Verify Zig
         run: zig version
