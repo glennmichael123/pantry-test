@@ -41,9 +41,6 @@ jobs:
         with:
           setup-only: 'true'
 
-      - name: Verify pantry installed
-        run: pantry --version
-
       - name: Publish (Dry Run)
         if: ${{ inputs.dry_run == true }}
         run: pantry publish --dry-run --access public
