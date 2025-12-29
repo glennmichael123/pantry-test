@@ -36,10 +36,21 @@ jobs:
       - name: Verify Zig
         run: zig version
 
-      - name: Setup pantry
-        uses: home-lang/pantry/packages/action@main
-        with:
-          setup-only: 'true'
+      - name: Build pantry from source
+        run: |
+          git clone --depth 1 https://github.com/home-lang/pantry.git ../pantry
+          cd ../pantry/packages/zig
+          mkdir -p pantry
+          cd pantry
+          git clone --depth 1 https://github.com/zig-utils/zig-cli.git
+          git clone --depth 1 https://github.com/zig-utils/zig-config.git
+          git clone --depth 1 https://github.com/zig-utils/zig-test-framework.git
+          cd ..
+          zig build
+          echo "$PWD/zig-out/bin" >> $GITHUB_PATH
+
+      - name: Verify pantry
+        run: pantry --version
 
       - name: Publish (Dry Run)
         if: ${{ inputs.dry_run == true }}
