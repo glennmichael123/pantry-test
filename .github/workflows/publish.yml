@@ -65,10 +65,10 @@ jobs:
       - name: Patch pantry for Zig 0.16 libc
         run: |
           cd ../pantry/packages/zig
-          # Fix std.c.lseek -> std.posix.lseek in io_helper.zig
-          sed -i 's/std\.c\.lseek/std.posix.lseek/g' src/io_helper.zig
-          # Fix std.c.fchmod -> std.posix.fchmod in shim.zig
-          sed -i 's/std\.c\.fchmod/std.posix.fchmod/g' src/cli/commands/shim.zig
+          # Fix std.c.lseek -> std.posix.system.lseek in io_helper.zig
+          sed -i 's/std\.c\.lseek/std.posix.system.lseek/g' src/io_helper.zig
+          # Fix std.c.fchmod -> std.posix.system.fchmod in shim.zig
+          sed -i 's/std\.c\.fchmod/std.posix.system.fchmod/g' src/cli/commands/shim.zig
 
       - name: Compile pantry
         run: |
